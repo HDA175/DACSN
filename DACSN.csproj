@@ -216,14 +216,5 @@
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="QLBH2.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="QLBH2_log.ldf">
-      <DependentUpon>QLBH2.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
