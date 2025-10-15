@@ -32,14 +32,15 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dtp_DenNgay = new System.Windows.Forms.DateTimePicker();
             this.dtp_TuNgay = new System.Windows.Forms.DateTimePicker();
             this.btn_Tim = new System.Windows.Forms.Button();
-            this.txt_Tim = new System.Windows.Forms.TextBox();
-            this.cb_MaH = new System.Windows.Forms.ComboBox();
+            this.txt_TuKhoa = new System.Windows.Forms.TextBox();
+            this.cb_ThongKe = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -102,6 +102,7 @@
             this.guna2Button2.Size = new System.Drawing.Size(274, 45);
             this.guna2Button2.TabIndex = 30;
             this.guna2Button2.Text = "Cập nhật";
+            this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
             // groupBox2
             // 
@@ -112,8 +113,8 @@
             this.groupBox2.Controls.Add(this.dtp_DenNgay);
             this.groupBox2.Controls.Add(this.dtp_TuNgay);
             this.groupBox2.Controls.Add(this.btn_Tim);
-            this.groupBox2.Controls.Add(this.txt_Tim);
-            this.groupBox2.Controls.Add(this.cb_MaH);
+            this.groupBox2.Controls.Add(this.txt_TuKhoa);
+            this.groupBox2.Controls.Add(this.cb_ThongKe);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(34, 73);
@@ -122,6 +123,23 @@
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.BorderRadius = 15;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.Chocolate;
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.Location = new System.Drawing.Point(1340, 16);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(274, 45);
+            this.guna2Button1.TabIndex = 31;
+            this.guna2Button1.Text = "Thống kê sản phẩm đã sử dụng";
             // 
             // pictureBox2
             // 
@@ -183,24 +201,26 @@
             this.btn_Tim.TabIndex = 26;
             this.btn_Tim.Text = "Tìm";
             this.btn_Tim.UseVisualStyleBackColor = true;
+            this.btn_Tim.Click += new System.EventHandler(this.btn_Tim_Click);
             // 
-            // txt_Tim
+            // txt_TuKhoa
             // 
-            this.txt_Tim.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Tim.Location = new System.Drawing.Point(1456, 84);
-            this.txt_Tim.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_Tim.Name = "txt_Tim";
-            this.txt_Tim.Size = new System.Drawing.Size(311, 30);
-            this.txt_Tim.TabIndex = 25;
+            this.txt_TuKhoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_TuKhoa.Location = new System.Drawing.Point(1456, 84);
+            this.txt_TuKhoa.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_TuKhoa.Name = "txt_TuKhoa";
+            this.txt_TuKhoa.Size = new System.Drawing.Size(311, 30);
+            this.txt_TuKhoa.TabIndex = 25;
             // 
-            // cb_MaH
+            // cb_ThongKe
             // 
-            this.cb_MaH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_MaH.FormattingEnabled = true;
-            this.cb_MaH.Location = new System.Drawing.Point(1014, 29);
-            this.cb_MaH.Name = "cb_MaH";
-            this.cb_MaH.Size = new System.Drawing.Size(198, 30);
-            this.cb_MaH.TabIndex = 23;
+            this.cb_ThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_ThongKe.FormattingEnabled = true;
+            this.cb_ThongKe.Location = new System.Drawing.Point(1014, 29);
+            this.cb_ThongKe.Name = "cb_ThongKe";
+            this.cb_ThongKe.Size = new System.Drawing.Size(198, 30);
+            this.cb_ThongKe.TabIndex = 23;
+            this.cb_ThongKe.SelectedIndexChanged += new System.EventHandler(this.cb_ThongKe_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -222,6 +242,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1813, 49);
             this.panel2.TabIndex = 18;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label6
             // 
@@ -278,6 +299,7 @@
             this.dgv_DoanhThu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_DoanhThu.Size = new System.Drawing.Size(1713, 295);
             this.dgv_DoanhThu.TabIndex = 12;
+            this.dgv_DoanhThu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_DoanhThu_CellDoubleClick);
             // 
             // panel1
             // 
@@ -494,22 +516,6 @@
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             // 
-            // guna2Button1
-            // 
-            this.guna2Button1.BorderRadius = 15;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Chocolate;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button1.Location = new System.Drawing.Point(1340, 16);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(274, 45);
-            this.guna2Button1.TabIndex = 31;
-            this.guna2Button1.Text = "Thống kê sản phẩm đã sử dụng";
-            // 
             // frmDoanhThu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -522,6 +528,7 @@
             this.Name = "frmDoanhThu";
             this.Text = "frmDoanhThu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmDoanhThu_Load);
             this.guna2Panel2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -555,8 +562,8 @@
         private System.Windows.Forms.DateTimePicker dtp_DenNgay;
         private System.Windows.Forms.DateTimePicker dtp_TuNgay;
         private System.Windows.Forms.Button btn_Tim;
-        private System.Windows.Forms.TextBox txt_Tim;
-        private System.Windows.Forms.ComboBox cb_MaH;
+        private System.Windows.Forms.TextBox txt_TuKhoa;
+        private System.Windows.Forms.ComboBox cb_ThongKe;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
