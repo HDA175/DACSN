@@ -8,31 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace DACSN
 {
     public partial class frmDMKhachHang : Form
     {
-        DataTable dtKhachHang = new DataTable();
-        int index = -1;
+        string connectionString = @"Data Source=DESKTOP-IGUJF5O\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True";
+        SqlConnection conn;
+        SqlDataAdapter adapter;
+        DataTable dtKhach;
+
         public frmDMKhachHang()
         {
             InitializeComponent();
-        }
-
-        private void txtDiaChi_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mtbDienThoai_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void guna2Panel2_Paint(object sender, PaintEventArgs e)
@@ -42,127 +31,176 @@ namespace DACSN
 
         private void frmDMKhachHang_Load(object sender, EventArgs e)
         {
-            dgvKhachHang.Columns.Add("STT", "STT");
-            dtKhachHang.Columns.Add("Mã KH");
-            dtKhachHang.Columns.Add("Tên KH");
-            dtKhachHang.Columns.Add("SĐT");
-            dtKhachHang.Columns.Add("Địa chỉ");
-            dgvKhachHang.DataSource = dtKhachHang;
+            conn = new SqlConnection(connectionString);
+            LoadData();
+            dgvKhachHang.ReadOnly = true;
             dgvKhachHang.AllowUserToAddRows = false;
+            dgvKhachHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (txtMaKhach.Text == "" || txtTenKhach.Text == "" || mtbDienThoai.Text == "" || txtDiaChi.Text == "")
+            if (txtMaKhach.Text == "" || txtTenKhach.Text == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
 
-            foreach (char c in mtbDienThoai.Text)
+            try
             {
-                if (!char.IsDigit(c))
-                {
-                    MessageBox.Show("Số điện thoại chỉ được chứa số!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    mtbDienThoai.Focus();
-                    return;
-                }
+                conn.Open();
+                string sql = "INSERT INTO tblKhach VALUES (@Ma, @Ten, @DiaChi, @SDT)";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Ma", txtMaKhach.Text);
+                cmd.Parameters.AddWithValue("@Ten", txtTenKhach.Text);
+                cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                cmd.Parameters.AddWithValue("@SDT", mtbSDT.Text);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Thêm khách hàng thành công!");
             }
-
-            dtKhachHang.Rows.Add(txtMaKhach.Text, txtTenKhach.Text, mtbDienThoai.Text, txtDiaChi.Text);
-
-            txtMaKhach.Clear();
-            txtTenKhach.Clear();
-            mtbDienThoai.Clear();
-            txtDiaChi.Clear();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm khách hàng: " + ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+            LoadData();
+            ClearFields();
         }
 
         private void dgvKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                index = e.RowIndex;
-                txtMaKhach.Text = dgvKhachHang.Rows[index].Cells[0].Value.ToString();
-                txtTenKhach.Text = dgvKhachHang.Rows[index].Cells[1].Value.ToString();
-                mtbDienThoai.Text = dgvKhachHang.Rows[index].Cells[2].Value.ToString();
-                txtDiaChi.Text = dgvKhachHang.Rows[index].Cells[3].Value.ToString();
+                txtMaKhach.Text = dgvKhachHang.Rows[e.RowIndex].Cells["MaKhach"].Value.ToString();
+                txtTenKhach.Text = dgvKhachHang.Rows[e.RowIndex].Cells["TenKhach"].Value.ToString();
+                txtDiaChi.Text = dgvKhachHang.Rows[e.RowIndex].Cells["DiaChi"].Value.ToString();
+                mtbSDT.Text = dgvKhachHang.Rows[e.RowIndex].Cells["DienThoai"].Value.ToString();
             }
 
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (index < 0)
-            {
-                MessageBox.Show("Vui lòng chọn khách hàng cần sửa!", "Thông báo");
-                return;
-            }
+            if (dgvKhachHang.CurrentRow == null) return;
 
-            DialogResult dr = MessageBox.Show("Bạn có chắc muốn sửa khách hàng này?",
-                                              "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (dr == DialogResult.Yes)
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa thông tin khách hàng này không?",
+                                                  "Xác nhận sửa",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                // Cập nhật lại thông tin trong DataTable
-                dtKhachHang.Rows[index]["Mã KH"] = txtMaKhach.Text;
-                dtKhachHang.Rows[index]["Tên KH"] = txtTenKhach.Text;
-                dtKhachHang.Rows[index]["SĐT"] = mtbDienThoai.Text;
-                dtKhachHang.Rows[index]["Địa chỉ"] = txtDiaChi.Text;
-                MessageBox.Show("Đã cập nhật thông tin khách hàng!", "Thông báo");
+                try
+                {
+                    conn.Open();
+                    string sql = "UPDATE tblKhach SET TenKhach=@Ten, DiaChi=@DiaChi, DienThoai=@SDT WHERE MaKhach=@Ma";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Ma", txtMaKhach.Text);
+                    cmd.Parameters.AddWithValue("@Ten", txtTenKhach.Text);
+                    cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                    cmd.Parameters.AddWithValue("@SDT", mtbSDT.Text);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Cập nhật thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi sửa khách hàng: " + ex.Message);
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open)
+                        conn.Close();
+                }
+                LoadData();
+                ClearFields();
             }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (index < 0)
-            {
-                MessageBox.Show("Vui lòng chọn khách hàng cần xóa!", "Thông báo");
-                return;
-            }
+            if (dgvKhachHang.CurrentRow == null) return;
 
-            DialogResult dr = MessageBox.Show("Bạn có chắc muốn xóa khách hàng này?",
-                                              "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (dr == DialogResult.Yes)
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn xóa khách hàng này không?",
+                                                  "Xác nhận xóa",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                dtKhachHang.Rows[index].Delete();
-                txtMaKhach.Clear();
-                txtTenKhach.Clear();
-                mtbDienThoai.Clear();
-                txtDiaChi.Clear();
-                index = -1;
+                try
+                {
+                    conn.Open();
+                    string sql = "DELETE FROM tblKhach WHERE MaKhach=@Ma";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Ma", txtMaKhach.Text);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Xóa thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi xóa khách hàng: " + ex.Message);
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open)
+                        conn.Close();
+                }
+                LoadData();
+                ClearFields();
             }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            string path = @"C:\KhachHang.csv";
-
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                foreach (DataRow row in dtKhachHang.Rows)
-                {
-                    sw.WriteLine(string.Join(",", row.ItemArray));
-                }
-            }
-
-            MessageBox.Show("Đã lưu thông tin khách hàng vào file C:\\KhachHang.csv", "Thông báo");
+            MessageBox.Show("Tất cả thay đổi đã được lưu vào CSDL!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void dgvKhachHang_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void LoadData()
         {
-            for (int i = 0; i < dgvKhachHang.Rows.Count; i++)
+            try
             {
-                dgvKhachHang.Rows[i].Cells["STT"].Value = i + 1;
+                conn.Open();
+                string sql = "SELECT * FROM tblKhach";
+                adapter = new SqlDataAdapter(sql, conn);
+                dtKhach = new DataTable();
+                adapter.Fill(dtKhach);
+                dgvKhachHang.DataSource = dtKhach;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
-        private void dgvKhachHang_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        private void ClearFields()
         {
-            for (int i = 0; i < dgvKhachHang.Rows.Count; i++)
+            txtMaKhach.Clear();
+            txtTenKhach.Clear();
+            txtDiaChi.Clear();
+            mtbSDT.Clear();
+            txtMaKhach.Focus();
+        }
+
+        private void mtbSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                dgvKhachHang.Rows[i].Cells["STT"].Value = i + 1;
+                e.Handled = true;
+                MessageBox.Show("Số điện thoại chỉ được nhập số!", "Cảnh báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void txtRefresh_Click(object sender, EventArgs e)
+        {
+            ClearFields();
         }
     }
 }
