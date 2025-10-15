@@ -47,7 +47,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtMaKhach = new System.Windows.Forms.TextBox();
-            this.mtbDienThoai = new System.Windows.Forms.MaskedTextBox();
+            this.mtbSDT = new System.Windows.Forms.MaskedTextBox();
             this.txtDiaChi = new System.Windows.Forms.TextBox();
             this.txtTenKhach = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -65,6 +65,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.txtRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -291,14 +292,12 @@
             this.dgvKhachHang.Size = new System.Drawing.Size(1851, 345);
             this.dgvKhachHang.TabIndex = 14;
             this.dgvKhachHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhachHang_CellClick);
-            this.dgvKhachHang.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvKhachHang_RowsAdded);
-            this.dgvKhachHang.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvKhachHang_RowsRemoved);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox3);
             this.groupBox1.Controls.Add(this.txtMaKhach);
-            this.groupBox1.Controls.Add(this.mtbDienThoai);
+            this.groupBox1.Controls.Add(this.mtbSDT);
             this.groupBox1.Controls.Add(this.txtDiaChi);
             this.groupBox1.Controls.Add(this.txtTenKhach);
             this.groupBox1.Controls.Add(this.label11);
@@ -312,7 +311,7 @@
             this.groupBox1.Size = new System.Drawing.Size(1851, 251);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Thông tin khách hàng";
             // 
             // pictureBox3
             // 
@@ -333,14 +332,14 @@
             this.txtMaKhach.Size = new System.Drawing.Size(360, 26);
             this.txtMaKhach.TabIndex = 13;
             // 
-            // mtbDienThoai
+            // mtbSDT
             // 
-            this.mtbDienThoai.Location = new System.Drawing.Point(1386, 168);
-            this.mtbDienThoai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.mtbDienThoai.Name = "mtbDienThoai";
-            this.mtbDienThoai.Size = new System.Drawing.Size(361, 26);
-            this.mtbDienThoai.TabIndex = 14;
-            this.mtbDienThoai.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbDienThoai_MaskInputRejected);
+            this.mtbSDT.Location = new System.Drawing.Point(1386, 168);
+            this.mtbSDT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mtbSDT.Name = "mtbSDT";
+            this.mtbSDT.Size = new System.Drawing.Size(361, 26);
+            this.mtbSDT.TabIndex = 14;
+            this.mtbSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbSDT_KeyPress);
             // 
             // txtDiaChi
             // 
@@ -349,7 +348,6 @@
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(361, 26);
             this.txtDiaChi.TabIndex = 13;
-            this.txtDiaChi.TextChanged += new System.EventHandler(this.txtDiaChi_TextChanged);
             // 
             // txtTenKhach
             // 
@@ -378,7 +376,6 @@
             this.label10.Size = new System.Drawing.Size(101, 32);
             this.label10.TabIndex = 11;
             this.label10.Text = "Địa chỉ";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
@@ -403,6 +400,7 @@
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2Panel2.Controls.Add(this.txtRefresh);
             this.guna2Panel2.Controls.Add(this.groupBox1);
             this.guna2Panel2.Controls.Add(this.dgvKhachHang);
             this.guna2Panel2.Controls.Add(this.btnSua);
@@ -565,6 +563,17 @@
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             // 
+            // txtRefresh
+            // 
+            this.txtRefresh.BackColor = System.Drawing.SystemColors.Control;
+            this.txtRefresh.Location = new System.Drawing.Point(120, 59);
+            this.txtRefresh.Name = "txtRefresh";
+            this.txtRefresh.Size = new System.Drawing.Size(127, 46);
+            this.txtRefresh.TabIndex = 16;
+            this.txtRefresh.Text = "Refresh";
+            this.txtRefresh.UseVisualStyleBackColor = false;
+            this.txtRefresh.Click += new System.EventHandler(this.txtRefresh_Click);
+            // 
             // frmDMKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -614,7 +623,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox txtMaKhach;
-        private System.Windows.Forms.MaskedTextBox mtbDienThoai;
+        private System.Windows.Forms.MaskedTextBox mtbSDT;
         private System.Windows.Forms.TextBox txtDiaChi;
         private System.Windows.Forms.TextBox txtTenKhach;
         private System.Windows.Forms.Label label11;
@@ -632,5 +641,6 @@
         private Guna.UI2.WinForms.Guna2Button btnLuu;
         private Guna.UI2.WinForms.Guna2Button btnXoa;
         private Guna.UI2.WinForms.Guna2Button btnThem;
+        private System.Windows.Forms.Button txtRefresh;
     }
 }
