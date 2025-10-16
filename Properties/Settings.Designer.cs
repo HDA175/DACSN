@@ -26,11 +26,11 @@ namespace DACSN.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI\\SQLEXPRESS;Initial Catalog=QLBanHang;Integrated Security=True;Tru" +
-            "stServerCertificate=True")]
-        public string QLBHConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;TrustSer" +
+            "verCertificate=True")]
+        public string QLBanHangConnectionString {
             get {
-                return ((string)(this["QLBHConnectionString"]));
+                return ((string)(this["QLBanHangConnectionString"]));
             }
         }
     }

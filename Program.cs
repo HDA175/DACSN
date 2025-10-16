@@ -18,7 +18,7 @@ namespace DACSN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmNhanVien());
+            Application.Run(new Trangchu());
         }
     }
 }
