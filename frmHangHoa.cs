@@ -339,5 +339,10 @@ namespace DACSN
             tblHang = Function.GetDataToTable(sql);
             dgvHang.DataSource = tblHang;
         }
+
+        private void cboMaChatLieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

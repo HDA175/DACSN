@@ -542,6 +542,7 @@
             this.cboMaChatLieu.Name = "cboMaChatLieu";
             this.cboMaChatLieu.Size = new System.Drawing.Size(452, 30);
             this.cboMaChatLieu.TabIndex = 30;
+            this.cboMaChatLieu.SelectedIndexChanged += new System.EventHandler(this.cboMaChatLieu_SelectedIndexChanged);
             // 
             // label14
             // 
