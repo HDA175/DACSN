@@ -354,5 +354,10 @@ namespace DACSN
             FormBangLuong frm = new FormBangLuong();
             frm.ShowDialog();
         }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

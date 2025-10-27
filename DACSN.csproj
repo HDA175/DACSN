@@ -90,6 +90,24 @@
     <Compile Include="FormBangLuong.Designer.cs">
       <DependentUpon>FormBangLuong.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCaNhanHoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCaNhanHoa.Designer.cs">
+      <DependentUpon>frmCaNhanHoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCaNhanHoa2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCaNhanHoa2.Designer.cs">
+      <DependentUpon>frmCaNhanHoa2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCaNhanHoa3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCaNhanHoa3.Designer.cs">
+      <DependentUpon>frmCaNhanHoa3.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChatLieu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +164,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLBHDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBHDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="QLBHDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBHDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Trangchu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +188,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBangLuong.resx">
       <DependentUpon>FormBangLuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCaNhanHoa.resx">
+      <DependentUpon>frmCaNhanHoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCaNhanHoa2.resx">
+      <DependentUpon>frmCaNhanHoa2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCaNhanHoa3.resx">
+      <DependentUpon>frmCaNhanHoa3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChatLieu.resx">
       <DependentUpon>frmChatLieu.cs</DependentUpon>
@@ -211,6 +248,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="QLBHDataSet.xsc">
+      <DependentUpon>QLBHDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QLBHDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QLBHDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QLBHDataSet.xss">
+      <DependentUpon>QLBHDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QLBHDataSet1.xsc">
+      <DependentUpon>QLBHDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="QLBHDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QLBHDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QLBHDataSet1.xss">
+      <DependentUpon>QLBHDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

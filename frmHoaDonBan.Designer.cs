@@ -28,20 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHoaDonBan));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.cboMaHDBan = new System.Windows.Forms.ComboBox();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
             this.txtTongTien = new System.Windows.Forms.TextBox();
             this.btnTim = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboMaHang = new System.Windows.Forms.ComboBox();
+            this.tblHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.qLBHDataSet1 = new DACSN.QLBHDataSet1();
             this.dgvHDBanHang = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTenHang = new System.Windows.Forms.TextBox();
             this.txtDonGiaBan = new System.Windows.Forms.TextBox();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
@@ -55,7 +53,9 @@
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cboMaKhach = new System.Windows.Forms.ComboBox();
+            this.tblKhachBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cboMaNhanVien = new System.Windows.Forms.ComboBox();
+            this.tblNhanVienBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtMaHDBan = new System.Windows.Forms.TextBox();
             this.txtNgayBan = new System.Windows.Forms.TextBox();
@@ -94,11 +94,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.cboMaHDBan = new System.Windows.Forms.ComboBox();
+            this.tblNhanVienTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblNhanVienTableAdapter();
+            this.tblHangTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblHangTableAdapter();
+            this.tblKhachTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblKhachTableAdapter();
             this.guna2Panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblHangBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHDBanHang)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblKhachBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblNhanVienBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -112,7 +118,6 @@
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Controls.Add(this.cboMaHDBan);
             this.guna2Panel2.Controls.Add(this.btnLuu);
-            this.guna2Panel2.Controls.Add(this.txtTongTien);
             this.guna2Panel2.Controls.Add(this.btnTim);
             this.guna2Panel2.Controls.Add(this.groupBox2);
             this.guna2Panel2.Controls.Add(this.groupBox1);
@@ -124,10 +129,20 @@
             this.guna2Panel2.Controls.Add(this.label7);
             this.guna2Panel2.Controls.Add(this.label22);
             this.guna2Panel2.Controls.Add(this.label6);
+            this.guna2Panel2.Controls.Add(this.txtTongTien);
             this.guna2Panel2.Location = new System.Drawing.Point(77, 159);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1813, 665);
             this.guna2Panel2.TabIndex = 15;
+            // 
+            // cboMaHDBan
+            // 
+            this.cboMaHDBan.FormattingEnabled = true;
+            this.cboMaHDBan.Location = new System.Drawing.Point(240, 24);
+            this.cboMaHDBan.Name = "cboMaHDBan";
+            this.cboMaHDBan.Size = new System.Drawing.Size(273, 24);
+            this.cboMaHDBan.TabIndex = 15;
+            this.cboMaHDBan.DropDown += new System.EventHandler(this.cboMaHDBan_DropDown);
             // 
             // btnLuu
             // 
@@ -199,74 +214,38 @@
             // 
             // cboMaHang
             // 
+            this.cboMaHang.DataSource = this.tblHangBindingSource;
+            this.cboMaHang.DisplayMember = "MaHang";
             this.cboMaHang.FormattingEnabled = true;
             this.cboMaHang.Location = new System.Drawing.Point(319, 43);
             this.cboMaHang.Name = "cboMaHang";
             this.cboMaHang.Size = new System.Drawing.Size(282, 24);
             this.cboMaHang.TabIndex = 14;
+            this.cboMaHang.ValueMember = "MaHang";
             this.cboMaHang.TextChanged += new System.EventHandler(this.cboMaHang_TextChanged);
+            // 
+            // tblHangBindingSource
+            // 
+            this.tblHangBindingSource.DataMember = "tblHang";
+            this.tblHangBindingSource.DataSource = this.qLBHDataSet1;
+            // 
+            // qLBHDataSet1
+            // 
+            this.qLBHDataSet1.DataSetName = "QLBHDataSet1";
+            this.qLBHDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dgvHDBanHang
             // 
             this.dgvHDBanHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHDBanHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.dgvHDBanHang.Location = new System.Drawing.Point(0, 119);
+            this.dgvHDBanHang.Location = new System.Drawing.Point(0, 123);
             this.dgvHDBanHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvHDBanHang.Name = "dgvHDBanHang";
             this.dgvHDBanHang.RowHeadersWidth = 62;
             this.dgvHDBanHang.RowTemplate.Height = 28;
-            this.dgvHDBanHang.Size = new System.Drawing.Size(1813, 174);
+            this.dgvHDBanHang.Size = new System.Drawing.Size(1827, 174);
             this.dgvHDBanHang.TabIndex = 2;
             this.dgvHDBanHang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHDBanHang_CellContentClick);
             this.dgvHDBanHang.DoubleClick += new System.EventHandler(this.dgvHDBanHang_DoubleClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Mã hàng";
-            this.Column1.MinimumWidth = 8;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Tên hàng";
-            this.Column2.MinimumWidth = 8;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Số lượng";
-            this.Column3.MinimumWidth = 8;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 150;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Đơn giá";
-            this.Column4.MinimumWidth = 8;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 150;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Giảm giá %";
-            this.Column5.MinimumWidth = 8;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 150;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column6.HeaderText = "Thành tiền";
-            this.Column6.MinimumWidth = 8;
-            this.Column6.Name = "Column6";
             // 
             // txtTenHang
             // 
@@ -397,22 +376,38 @@
             // 
             // cboMaKhach
             // 
+            this.cboMaKhach.DataSource = this.tblKhachBindingSource;
+            this.cboMaKhach.DisplayMember = "MaKhach";
             this.cboMaKhach.FormattingEnabled = true;
             this.cboMaKhach.Location = new System.Drawing.Point(1257, 27);
             this.cboMaKhach.Name = "cboMaKhach";
             this.cboMaKhach.Size = new System.Drawing.Size(322, 24);
             this.cboMaKhach.TabIndex = 14;
+            this.cboMaKhach.ValueMember = "MaKhach";
             this.cboMaKhach.TextChanged += new System.EventHandler(this.cboMaKhach_TextChanged);
+            // 
+            // tblKhachBindingSource
+            // 
+            this.tblKhachBindingSource.DataMember = "tblKhach";
+            this.tblKhachBindingSource.DataSource = this.qLBHDataSet1;
             // 
             // cboMaNhanVien
             // 
+            this.cboMaNhanVien.DataSource = this.tblNhanVienBindingSource;
+            this.cboMaNhanVien.DisplayMember = "MaNhanVien";
             this.cboMaNhanVien.FormattingEnabled = true;
             this.cboMaNhanVien.Location = new System.Drawing.Point(194, 117);
             this.cboMaNhanVien.Name = "cboMaNhanVien";
             this.cboMaNhanVien.Size = new System.Drawing.Size(322, 24);
             this.cboMaNhanVien.TabIndex = 13;
+            this.cboMaNhanVien.ValueMember = "MaNhanVien";
             this.cboMaNhanVien.SelectedIndexChanged += new System.EventHandler(this.cboMaNhanVien_SelectedIndexChanged);
             this.cboMaNhanVien.TextChanged += new System.EventHandler(this.cboMaNhanVien_TextChanged);
+            // 
+            // tblNhanVienBindingSource
+            // 
+            this.tblNhanVienBindingSource.DataMember = "tblNhanVien";
+            this.tblNhanVienBindingSource.DataSource = this.qLBHDataSet1;
             // 
             // pictureBox3
             // 
@@ -875,14 +870,17 @@
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             // 
-            // cboMaHDBan
+            // tblNhanVienTableAdapter
             // 
-            this.cboMaHDBan.FormattingEnabled = true;
-            this.cboMaHDBan.Location = new System.Drawing.Point(240, 24);
-            this.cboMaHDBan.Name = "cboMaHDBan";
-            this.cboMaHDBan.Size = new System.Drawing.Size(273, 24);
-            this.cboMaHDBan.TabIndex = 15;
-            this.cboMaHDBan.DropDown += new System.EventHandler(this.cboMaHDBan_DropDown);
+            this.tblNhanVienTableAdapter.ClearBeforeFill = true;
+            // 
+            // tblHangTableAdapter
+            // 
+            this.tblHangTableAdapter.ClearBeforeFill = true;
+            // 
+            // tblKhachTableAdapter
+            // 
+            this.tblKhachTableAdapter.ClearBeforeFill = true;
             // 
             // frmHoaDonBan
             // 
@@ -903,9 +901,13 @@
             this.guna2Panel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblHangBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHDBanHang)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblKhachBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblNhanVienBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -947,12 +949,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.TextBox txtMaHDBan;
         private System.Windows.Forms.TextBox txtNgayBan;
         private System.Windows.Forms.TextBox txtTenNhanVien;
@@ -985,5 +981,12 @@
         private System.Windows.Forms.ComboBox cboMaHang;
         private Guna.UI2.WinForms.Guna2Button btnLuu;
         private System.Windows.Forms.ComboBox cboMaHDBan;
+        private QLBHDataSet1 qLBHDataSet1;
+        private System.Windows.Forms.BindingSource tblNhanVienBindingSource;
+        private QLBHDataSet1TableAdapters.tblNhanVienTableAdapter tblNhanVienTableAdapter;
+        private System.Windows.Forms.BindingSource tblHangBindingSource;
+        private QLBHDataSet1TableAdapters.tblHangTableAdapter tblHangTableAdapter;
+        private System.Windows.Forms.BindingSource tblKhachBindingSource;
+        private QLBHDataSet1TableAdapters.tblKhachTableAdapter tblKhachTableAdapter;
     }
 }

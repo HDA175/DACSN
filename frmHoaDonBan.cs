@@ -22,6 +22,12 @@ namespace DACSN
 
         private void frmHoaDonBan_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'qLBHDataSet1.tblKhach' table. You can move, or remove it, as needed.
+            this.tblKhachTableAdapter.Fill(this.qLBHDataSet1.tblKhach);
+            // TODO: This line of code loads data into the 'qLBHDataSet1.tblHang' table. You can move, or remove it, as needed.
+            this.tblHangTableAdapter.Fill(this.qLBHDataSet1.tblHang);
+            // TODO: This line of code loads data into the 'qLBHDataSet1.tblNhanVien' table. You can move, or remove it, as needed.
+            this.tblNhanVienTableAdapter.Fill(this.qLBHDataSet1.tblNhanVien);
             btnThem.Enabled = true;
             btnInHoaDon.Enabled = false;
             btnXoa.Enabled = false;

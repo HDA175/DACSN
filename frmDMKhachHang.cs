@@ -14,7 +14,7 @@ namespace DACSN
 {
     public partial class frmDMKhachHang : Form
     {
-        string connectionString = @"Data Source=DESKTOP-IGUJF5O\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True";
+        string connectionString = @"Data Source=PC-05082023\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True";
         SqlConnection conn;
         SqlDataAdapter adapter;
         DataTable dtKhach;
