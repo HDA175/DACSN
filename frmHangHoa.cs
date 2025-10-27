@@ -21,6 +21,8 @@ namespace DACSN
 
         private void frmHangHoa_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'qLBHDataSet.tblChatLieu' table. You can move, or remove it, as needed.
+            this.tblChatLieuTableAdapter.Fill(this.qLBHDataSet.tblChatLieu);
             string sql;
             sql = "SELECT * from tblChatLieu";
             txtMaHang.Enabled = false;
@@ -28,6 +30,7 @@ namespace DACSN
             btnBoQua.Enabled = false;
             LoadDataGridView();
             Function.FillCombo(sql, cboMaChatLieu, "MaChatLieu", "TenChatLieu");
+            this.tblChatLieuTableAdapter.Fill(this.qLBHDataSet.tblChatLieu);
             cboMaChatLieu.SelectedIndex = -1;
             ResetValues();
         }
@@ -35,7 +38,7 @@ namespace DACSN
         {
             txtMaHang.Text = "";
             txtTenHang.Text = "";
-            cboMaChatLieu.Text = "";
+            cboMaChatLieu.Text = ""; 
             txtSoLuong.Text = "0";
             txtDonGiaNhap.Text = "0";
             txtDonGiaBan.Text = "0";
@@ -61,16 +64,23 @@ namespace DACSN
                 dgvHang.Columns["TenHang"].HeaderText = "Tên hàng";
                 dgvHang.Columns["MaChatLieu"].HeaderText = "Chất liệu";
                 dgvHang.Columns["SoLuong"].HeaderText = "Số lượng";
+                dgvHang.Columns["MauSac"].HeaderText = "Màu sắc";
+                dgvHang.Columns["KieuDang"].HeaderText = "Kiểu dáng";
+                dgvHang.Columns["KieuDeToc"].HeaderText = "Kiểu đế tóc";
                 dgvHang.Columns["DonGiaNhap"].HeaderText = "Đơn giá nhập";
                 dgvHang.Columns["DonGiaBan"].HeaderText = "Đơn giá bán";
                 dgvHang.Columns["Anh"].HeaderText = "Ảnh";
                 dgvHang.Columns["Ghichu"].HeaderText = "Ghi chú";
+               
 
                 // Set width tương ứng (dùng tên cột)
                 dgvHang.Columns["MaHang"].Width = 80;
                 dgvHang.Columns["TenHang"].Width = 140;
                 dgvHang.Columns["MaChatLieu"].Width = 80;
                 dgvHang.Columns["SoLuong"].Width = 80;
+                dgvHang.Columns["MauSac"].Width = 80;
+                dgvHang.Columns["KieuDang"].Width = 80;
+                dgvHang.Columns["KieuDeToc"].Width = 80;
                 dgvHang.Columns["DonGiaNhap"].Width = 100;
                 dgvHang.Columns["DonGiaBan"].Width = 100;
                 dgvHang.Columns["Anh"].Width = 200;
@@ -176,26 +186,36 @@ namespace DACSN
                 return;
             }
 
-            // ✅ Tạo câu lệnh Insert chuẩn
-            sql = "INSERT INTO tblHang(MaHang, TenHang, MaChatLieu, SoLuong, DonGiaNhap, DonGiaBan, Anh, Ghichu) " +
-                  "VALUES(N'" + txtMaHang.Text.Trim() +
-                  "', N'" + txtTenHang.Text.Trim() +
-                  "', N'" + cboMaChatLieu.SelectedValue.ToString() +
-                  "', " + txtSoLuong.Text.Trim() +
-                  ", " + txtDonGiaNhap.Text.Trim() +
-                  ", " + txtDonGiaBan.Text.Trim() +
-                  ", N'" + txtAnh.Text.Trim() +
-                  "', N'" + txtGhichu.Text.Trim() + "')";
+             sql = "INSERT INTO tblHang(MaHang, TenHang, MaChatLieu, SoLuong, DonGiaNhap, DonGiaBan, Anh, Ghichu, MauSac, KieuDang, KieuDeToc) " +
+                  "VALUES(@maHang, @tenHang, @maChatLieu, @soLuong, @donGiaNhap, @donGiaBan, @anh, @ghiChu, @mauSac, @kieuDang, @kieuDeToc)";
+
+            // 2. Tạo một mảng các tham số SqlParameter
+            SqlParameter[] parameters = new SqlParameter[]
+{
+    new SqlParameter("@maHang", txtMaHang.Text.Trim()),
+    new SqlParameter("@tenHang", txtTenHang.Text.Trim()),
+    new SqlParameter("@maChatLieu", cboMaChatLieu.SelectedValue.ToString()),
+    new SqlParameter("@soLuong", Convert.ToInt32(txtSoLuong.Text.Trim())),
+    new SqlParameter("@donGiaNhap", Convert.ToDouble(txtDonGiaNhap.Text.Trim())),
+    new SqlParameter("@donGiaBan", Convert.ToDouble(txtDonGiaBan.Text.Trim())),
+    new SqlParameter("@anh", txtAnh.Text.Trim()),
+    new SqlParameter("@ghiChu", txtGhichu.Text.Trim()),
+    new SqlParameter("@mauSac", txtMauSac.Text.Trim()),
+    new SqlParameter("@kieuDang", txtKieuDang.Text.Trim()),
+    new SqlParameter("@kieuDeToc", txtKieuDe.Text.Trim())
+};
 
             try
             {
-                Function.RunSQL(sql);  // ✅ Gọi hàm dùng connection string đúng
+                // 3. Gọi hàm RunSQL mới và truyền cả câu lệnh và mảng tham số vào
+                Function.RunSQL(sql, parameters);
+
                 LoadDataGridView();
                 MessageBox.Show("Thêm hàng hóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi thêm hàng hóa: " + ex.Message);
+                MessageBox.Show("Lỗi khi thêm hàng hóa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             ResetValues();
@@ -244,6 +264,9 @@ namespace DACSN
             sql = "UPDATE tblHang SET TenHang=N'" + txtTenHang.Text.Trim().ToString() +
                 "',MaChatLieu=N'" + cboMaChatLieu.SelectedValue.ToString() +
                 "',SoLuong=" + txtSoLuong.Text +
+                "',MauSac=N'" + txtMauSac.Text +
+                "',KieuDang=N'" + txtKieuDang.Text +
+                "',KieuDeToc=N'" + txtKieuDe.Text +
                 ",Anh='" + txtAnh.Text + "',Ghichu=N'" + txtGhichu.Text + "' WHERE MaHang=N'" + txtMaHang.Text + "'";
             Function.RunSQL(sql);
             LoadDataGridView();
@@ -335,9 +358,50 @@ namespace DACSN
         private void btnHienThi_Click(object sender, EventArgs e)
         {
             string sql;
-            sql = "SELECT MaHang,TenHang,MaChatLieu,SoLuong,DonGiaNhap,DonGiaBan,Anh,Ghichu FROM tblHang";
+            sql = "SELECT MaHang,TenHang,MaChatLieu,SoLuong,DonGiaNhap,DonGiaBan,Anh,Ghichu,MauSac,KieuDang,KieuDeToc FROM tblHang";
             tblHang = Function.GetDataToTable(sql);
             dgvHang.DataSource = tblHang;
+        }
+
+        private void cboMaChatLieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.tblChatLieuTableAdapter.FillBy(this.qLBHDataSet.tblChatLieu);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void cáNhânToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sảnPhẩmMuaỞShopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCaNhanHoa frmCaNhanHoa = new frmCaNhanHoa();
+            frmCaNhanHoa.ShowDialog();
+        }
+
+        private void sảnPhẩmBênNgoàiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCaNhanHoa2 frmCaNhanHoa2 = new frmCaNhanHoa2();
+            frmCaNhanHoa2.ShowDialog();
+        }
+
+        private void hàngĐặtThiếtKếRiêngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCaNhanHoa3 frmCaNhanHoa3 = new frmCaNhanHoa3();
+            frmCaNhanHoa3.ShowDialog();
         }
     }
 }

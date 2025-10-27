@@ -62,6 +62,49 @@ namespace DACSN.Class
             int kq = comm.ExecuteNonQuery();
             return kq;
         }
+        public DataTable LoadDL(string sql, List<SqlParameter> parameters)
+        {
+            Connect();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            if (parameters != null)
+            {
+                cmd.Parameters.AddRange(parameters.ToArray());
+            }
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Disconnect();
+            return dt;
+        }
+        public static void RunSQL(string sql, SqlParameter[] parameters)
+        {
+            using (SqlConnection connection = new SqlConnection(con.ConnectionString)) // connectionString là chuỗi kết nối của bạn
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    // Thêm tất cả các tham số được truyền vào
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        // === HÀM MỚI ĐỂ XỬ LÝ THAM SỐ AN TOÀN (Bổ sung vào) ===
+        public object LayGT(string sql, List<SqlParameter> parameters)
+        {
+            Connect();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            if (parameters != null)
+            {
+                cmd.Parameters.AddRange(parameters.ToArray());
+            }
+            object result = cmd.ExecuteScalar();
+            Disconnect();
+            return result;
+        }
         public static void RunSQL(string sql)
         {
             SqlCommand cmd; //Đối tượng thuộc lớp SqlCommand

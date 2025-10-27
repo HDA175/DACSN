@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using DACSN.Class;
+using System.Data.SqlClient;
 namespace DACSN
 {
     public partial class frmDoanhThu : Form
@@ -18,33 +19,55 @@ namespace DACSN
         {
             InitializeComponent();
         }
-        private void TinhTongTien()
-        {
-            decimal tong = 0;
-            foreach (DataGridViewRow row in dgv_DoanhThu.Rows)
-            {
-                if (row.Cells["TongTien"].Value != null)
-                {
-                    decimal gia;
-                    if (decimal.TryParse(row.Cells["TongTien"].Value.ToString(), out gia))
-                        tong += gia;
-                }
-            }
-            txt_TongTien.Text = tong.ToString("N0", CultureInfo.InvariantCulture);
-        }
         private void frmDoanhThu_Load(object sender, EventArgs e)
         {
             cb_ThongKe.Items.Clear();
-            cb_ThongKe.Items.AddRange(new string[] { "Ngày", "Tuần", "Tháng", "Năm" });
+            cb_ThongKe.Items.AddRange(new string[] { "Tất cả", "Ngày", "Tuần", "Tháng", "Năm" });
+            cb_ThongKe.SelectedIndex = 0; // Mặc định là "Tất cả"
 
-            if (cb_ThongKe.Items.Count > 0)
-                cb_ThongKe.SelectedIndex = 0;
+            // Xóa bỏ các hàm cập nhật không cần thiết và sai logic
+            // CapNhatLaiThanhTien(); // BỎ
+            // CapNhatTongDoanhThu(); // BỎ
+            // LoadData(); // Sẽ được gọi trong sự kiện SelectedIndexChanged
 
-            LoadData();
-            CapNhatLaiThanhTien();
-            CapNhatTongDoanhThu();
-            dgv_DoanhThu.Columns["TongTien"].DefaultCellStyle.Format = "#,##0 VNĐ";
+            // Thiết lập định dạng cho cột tiền tệ
+            dgv_DoanhThu.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+            dgv_DoanhThu.Columns["TongTien"].DefaultCellStyle.FormatProvider = new CultureInfo("vi-VN");
+            TinhTongTien();
+        }
+        private void LoadDataAndCalculateTotal(string dieuKien, List<SqlParameter> parameters = null)
+        {
+            try
+            {
+                // Câu lệnh lấy dữ liệu chi tiết cho DataGridView
+                string sqlData = "SELECT ct.MaHDBan, hd.NgayBan, SUM(ct.ThanhTien) AS TongTien " +
+                                 "FROM tblChiTietHDBan ct JOIN tblHDBan hd ON ct.MaHDBan = hd.MaHDBan " +
+                                 "WHERE 1=1 " + dieuKien + " " +
+                                 "GROUP BY ct.MaHDBan, hd.NgayBan";
 
+                dgv_DoanhThu.DataSource = lop.LoadDL(sqlData, parameters);
+
+                // Câu lệnh tính tổng doanh thu chính xác từ CSDL theo điều kiện lọc
+                string sqlTotal = "SELECT SUM(ct.ThanhTien) " +
+                                  "FROM tblChiTietHDBan ct JOIN tblHDBan hd ON ct.MaHDBan = hd.MaHDBan " +
+                                  "WHERE 1=1 " + dieuKien;
+
+                object tongObj = lop.LayGT(sqlTotal, parameters);
+                if (tongObj != DBNull.Value && tongObj != null)
+                {
+                    decimal tong = Convert.ToDecimal(tongObj);
+                    // Định dạng tiền tệ theo kiểu Việt Nam (dấu chấm ngăn cách hàng nghìn)
+                    txt_TongTien.Text = tong.ToString("N0", new CultureInfo("vi-VN")) + " VNĐ";
+                }
+                else
+                {
+                    txt_TongTien.Text = "0 VNĐ";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         void LoadData()
         {
@@ -92,78 +115,116 @@ namespace DACSN
         private void btn_Tim_Click(object sender, EventArgs e)
         {
 
-            string keyword = txt_TuKhoa.Text.Trim();
-            DateTime tuNgayDate = dtp_TuNgay.Value.Date;
-            DateTime denNgayDate = dtp_DenNgay.Value.Date;
-
-            if (tuNgayDate > denNgayDate)
+            if (dtp_TuNgay.Value.Date > dtp_DenNgay.Value.Date)
             {
-                MessageBox.Show("Từ ngày không được lớn hơn đến ngày.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string tuNgay = tuNgayDate.ToString("yyyy-MM-dd");
-            string denNgay = denNgayDate.ToString("yyyy-MM-dd");
+            // Xây dựng điều kiện và tham số một cách an toàn
+            string dieuKien = "AND hd.NgayBan BETWEEN @TuNgay AND @DenNgay ";
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@TuNgay", dtp_TuNgay.Value.Date),
+                new SqlParameter("@DenNgay", dtp_DenNgay.Value.Date.AddDays(1).AddSeconds(-1)) // Lấy hết các giao dịch trong ngày cuối
+            };
 
-            string dkKeyword = "";
+            string keyword = txt_TuKhoa.Text.Trim();
             if (!string.IsNullOrEmpty(keyword))
             {
-                dkKeyword = $"AND (ct.MaHDBan LIKE N'%{keyword}%' OR ct.ThanhTien LIKE N'%{keyword}%') ";
+                dieuKien += "AND ct.MaHDBan LIKE @Keyword ";
+                parameters.Add(new SqlParameter("@Keyword", "%" + keyword + "%"));
             }
 
-            string sql = "SELECT ct.MaHDBan, hd.NgayBan, SUM(ct.ThanhTien) AS TongTien " +
-                         "FROM tblChiTietHDBan ct JOIN tblHDBan hd ON ct.MaHDBan = hd.MaHDBan " +
-                         $"WHERE hd.NgayBan BETWEEN '{tuNgay}' AND '{denNgay}' {dkKeyword} " +
-                         "GROUP BY ct.MaHDBan, hd.NgayBan";
-
+            // Gọi hàm trung tâm để tải dữ liệu
+            LoadDataAndCalculateTotal(dieuKien, parameters);
+            string sql = "SELECT ...";
             dgv_DoanhThu.DataSource = lop.LoadDL(sql);
+
+            // Gọi hàm tính tổng để cập nhật lại tổng tiền theo kết quả tìm kiếm
             TinhTongTien();
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
+            // Nút Làm mới
             txt_TuKhoa.Clear();
+            dtp_TuNgay.Value = DateTime.Now;
+            dtp_DenNgay.Value = DateTime.Now;
             cb_ThongKe.SelectedIndex = 0;
-            LoadData();
         }
 
         private void cb_ThongKe_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string dk = "";
-            string tuNgay = dtp_TuNgay.Value.ToString("yyyy-MM-dd");
-            string denNgay = dtp_DenNgay.Value.ToString("yyyy-MM-dd");
+            string dieuKien = "";
+            var parameters = new List<SqlParameter>();
+            DateTime ngayChon = dtp_TuNgay.Value.Date;
 
-            if (cb_ThongKe.Text == "Ngày")
+            switch (cb_ThongKe.Text)
             {
-                dk = $"AND hd.NgayBan = '{tuNgay}'";
-            }
-            else if (cb_ThongKe.Text == "Tuần")
-            {
-                DateTime tu = dtp_TuNgay.Value.Date;
-                DateTime den = tu.AddDays(7);
-                dk = $"AND hd.NgayBan >= '{tu:yyyy-MM-dd}' AND hd.NgayBan < '{den:yyyy-MM-dd}'";
-            }
-            else if (cb_ThongKe.Text == "Tháng")
-            {
-                dk = $"AND MONTH(hd.NgayBan) = '{dtp_TuNgay.Value.Month}' AND YEAR(hd.NgayBan) = '{dtp_TuNgay.Value.Year}'";
-            }
-            else if (cb_ThongKe.Text == "Năm")
-            {
-                dk = $"AND YEAR(hd.NgayBan) = '{dtp_TuNgay.Value.Year}'";
+                case "Ngày":
+                    dieuKien = "AND CONVERT(date, hd.NgayBan) = @Ngay";
+                    parameters.Add(new SqlParameter("@Ngay", ngayChon));
+                    break;
+                case "Tuần":
+                    // Lấy ngày đầu tuần (Thứ 2)
+                    DateTime dauTuan = ngayChon.AddDays(-(int)ngayChon.DayOfWeek + (int)DayOfWeek.Monday);
+                    if (ngayChon.DayOfWeek == DayOfWeek.Sunday) dauTuan = dauTuan.AddDays(-7); // Xử lý cho Chủ nhật
+                    DateTime cuoiTuan = dauTuan.AddDays(7);
+                    dieuKien = "AND hd.NgayBan >= @DauTuan AND hd.NgayBan < @CuoiTuan";
+                    parameters.Add(new SqlParameter("@DauTuan", dauTuan));
+                    parameters.Add(new SqlParameter("@CuoiTuan", cuoiTuan));
+                    break;
+                case "Tháng":
+                    dieuKien = "AND MONTH(hd.NgayBan) = @Thang AND YEAR(hd.NgayBan) = @Nam";
+                    parameters.Add(new SqlParameter("@Thang", ngayChon.Month));
+                    parameters.Add(new SqlParameter("@Nam", ngayChon.Year));
+                    break;
+                case "Năm":
+                    dieuKien = "AND YEAR(hd.NgayBan) = @Nam";
+                    parameters.Add(new SqlParameter("@Nam", ngayChon.Year));
+                    break;
+                case "Tất cả":
+                default:
+                    // Không cần thêm điều kiện
+                    break;
             }
 
-            string sql = "SELECT ct.MaHDBan, hd.NgayBan, SUM(ct.Thanhtien) AS TongTien " +
-                         "FROM tblChiTietHDBan ct JOIN tblHDBan hd ON ct.MaHDBan = hd.MaHDBan " +
-                         "WHERE 1=1 " + dk +
-                         " GROUP BY ct.MaHDBan, hd.NgayBan";
+            LoadDataAndCalculateTotal(dieuKien, parameters);
+        }
+        private void TinhTongTien()
+        {
+            decimal tongTien = 0;
 
-            dgv_DoanhThu.DataSource = lop.LoadDL(sql);
-            TinhTongTien(); 
+            // Duyệt qua tất cả các dòng trong DataGridView
+            foreach (DataGridViewRow row in dgv_DoanhThu.Rows)
+            {
+                // Kiểm tra để chắc chắn rằng ô không bị rỗng
+                if (row.Cells["TongTien"].Value != null)
+                {
+                    decimal giaTri;
+                    // Cố gắng chuyển đổi giá trị của ô sang dạng số (decimal)
+                    // Dùng TryParse để tránh lỗi nếu giá trị không phải là số
+                    if (decimal.TryParse(row.Cells["TongTien"].Value.ToString(), out giaTri))
+                    {
+                        // Nếu chuyển đổi thành công, cộng vào tổng
+                        tongTien += giaTri;
+                    }
+                }
+            }
+
+            // Định dạng tổng tiền theo kiểu Việt Nam (ví dụ: 1.000.000) và hiển thị
+            txt_TongTien.Text = tongTien.ToString("N0", new CultureInfo("vi-VN")) + " VNĐ";
         }
 
         private void dgv_DoanhThu_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
            
+        }
+
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
