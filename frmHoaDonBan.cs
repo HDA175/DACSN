@@ -526,5 +526,10 @@ namespace DACSN
             btnInHoaDon.Enabled = true;
             cboMaHDBan.SelectedIndex = -1;
         }
+
+        private void txtTenHang_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

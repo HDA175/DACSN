@@ -33,7 +33,6 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.cboMaHDBan = new System.Windows.Forms.ComboBox();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
-            this.txtTongTien = new System.Windows.Forms.TextBox();
             this.btnTim = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboMaHang = new System.Windows.Forms.ComboBox();
@@ -79,6 +78,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.txtTongTien = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnDoanhThu = new Guna.UI2.WinForms.Guna2Button();
@@ -161,15 +161,6 @@
             this.btnLuu.TabIndex = 14;
             this.btnLuu.Text = "Luu";
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
-            // 
-            // txtTongTien
-            // 
-            this.txtTongTien.Location = new System.Drawing.Point(1268, 30);
-            this.txtTongTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTongTien.Name = "txtTongTien";
-            this.txtTongTien.ReadOnly = true;
-            this.txtTongTien.Size = new System.Drawing.Size(322, 22);
-            this.txtTongTien.TabIndex = 13;
             // 
             // btnTim
             // 
@@ -254,6 +245,7 @@
             this.txtTenHang.Name = "txtTenHang";
             this.txtTenHang.Size = new System.Drawing.Size(282, 22);
             this.txtTenHang.TabIndex = 1;
+            this.txtTenHang.TextChanged += new System.EventHandler(this.txtTenHang_TextChanged);
             // 
             // txtDonGiaBan
             // 
@@ -654,6 +646,15 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 16);
             this.label6.TabIndex = 0;
+            // 
+            // txtTongTien
+            // 
+            this.txtTongTien.Location = new System.Drawing.Point(1268, 30);
+            this.txtTongTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTongTien.Name = "txtTongTien";
+            this.txtTongTien.ReadOnly = true;
+            this.txtTongTien.Size = new System.Drawing.Size(322, 22);
+            this.txtTongTien.TabIndex = 13;
             // 
             // panel1
             // 

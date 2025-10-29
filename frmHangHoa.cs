@@ -66,6 +66,7 @@ namespace DACSN
                 dgvHang.Columns["SoLuong"].HeaderText = "Số lượng";
                 dgvHang.Columns["MauSac"].HeaderText = "Màu sắc";
                 dgvHang.Columns["KieuDang"].HeaderText = "Kiểu dáng";
+                dgvHang.Columns["DoDai"].HeaderText = "Độ dài";
                 dgvHang.Columns["KieuDeToc"].HeaderText = "Kiểu đế tóc";
                 dgvHang.Columns["DonGiaNhap"].HeaderText = "Đơn giá nhập";
                 dgvHang.Columns["DonGiaBan"].HeaderText = "Đơn giá bán";
@@ -80,6 +81,7 @@ namespace DACSN
                 dgvHang.Columns["SoLuong"].Width = 80;
                 dgvHang.Columns["MauSac"].Width = 80;
                 dgvHang.Columns["KieuDang"].Width = 80;
+                dgvHang.Columns["DoDai"].Width = 80;
                 dgvHang.Columns["KieuDeToc"].Width = 80;
                 dgvHang.Columns["DonGiaNhap"].Width = 100;
                 dgvHang.Columns["DonGiaBan"].Width = 100;
@@ -186,8 +188,8 @@ namespace DACSN
                 return;
             }
 
-             sql = "INSERT INTO tblHang(MaHang, TenHang, MaChatLieu, SoLuong, DonGiaNhap, DonGiaBan, Anh, Ghichu, MauSac, KieuDang, KieuDeToc) " +
-                  "VALUES(@maHang, @tenHang, @maChatLieu, @soLuong, @donGiaNhap, @donGiaBan, @anh, @ghiChu, @mauSac, @kieuDang, @kieuDeToc)";
+             sql = "INSERT INTO tblHang(MaHang, TenHang, MaChatLieu, SoLuong, DonGiaNhap, DonGiaBan, Anh, Ghichu, MauSac, KieuDang, KieuDeToc, DoDai) " +
+                  "VALUES(@maHang, @tenHang, @maChatLieu, @soLuong, @donGiaNhap, @donGiaBan, @anh, @ghiChu, @mauSac, @kieuDang, @kieuDeToc, @dodai)";
 
             // 2. Tạo một mảng các tham số SqlParameter
             SqlParameter[] parameters = new SqlParameter[]
@@ -202,6 +204,7 @@ namespace DACSN
     new SqlParameter("@ghiChu", txtGhichu.Text.Trim()),
     new SqlParameter("@mauSac", txtMauSac.Text.Trim()),
     new SqlParameter("@kieuDang", txtKieuDang.Text.Trim()),
+    new SqlParameter("@dodai", txtDoDai.Text.Trim()),
     new SqlParameter("@kieuDeToc", txtKieuDe.Text.Trim())
 };
 
@@ -266,6 +269,7 @@ namespace DACSN
                 "',SoLuong=" + txtSoLuong.Text +
                 "',MauSac=N'" + txtMauSac.Text +
                 "',KieuDang=N'" + txtKieuDang.Text +
+                "',DoDai=N'" + txtDoDai.Text +
                 "',KieuDeToc=N'" + txtKieuDe.Text +
                 ",Anh='" + txtAnh.Text + "',Ghichu=N'" + txtGhichu.Text + "' WHERE MaHang=N'" + txtMaHang.Text + "'";
             Function.RunSQL(sql);
@@ -402,6 +406,11 @@ namespace DACSN
         {
             frmCaNhanHoa3 frmCaNhanHoa3 = new frmCaNhanHoa3();
             frmCaNhanHoa3.ShowDialog();
+        }
+
+        private void txtKieuDe_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

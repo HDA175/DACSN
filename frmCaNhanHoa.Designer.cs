@@ -51,6 +51,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label24 = new System.Windows.Forms.Label();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -71,13 +72,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTenSPGoc = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label22 = new System.Windows.Forms.Label();
             this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.cboMaKhach = new System.Windows.Forms.ComboBox();
-            this.cboMaNhanVien = new System.Windows.Forms.ComboBox();
+            this.cboMaSPGoc = new System.Windows.Forms.ComboBox();
+            this.tblHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.qLBHDataSet1 = new DACSN.QLBHDataSet1();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtTenKhach = new System.Windows.Forms.TextBox();
             this.txtDiaChi = new System.Windows.Forms.TextBox();
@@ -96,7 +99,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.guna2ColorTransition1 = new Guna.UI2.WinForms.Guna2ColorTransition(this.components);
-            this.label24 = new System.Windows.Forms.Label();
+            this.tblHangTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblHangTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.tblChatLieuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet)).BeginInit();
             this.fillByToolStrip.SuspendLayout();
@@ -108,6 +111,8 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHDBanHang)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblHangBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -129,7 +134,7 @@
             this.fillByToolStripButton});
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(1924, 31);
+            this.fillByToolStrip.Size = new System.Drawing.Size(1924, 27);
             this.fillByToolStrip.TabIndex = 19;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
@@ -378,6 +383,15 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1824, 665);
             this.guna2Panel2.TabIndex = 20;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(805, 58);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(249, 16);
+            this.label24.TabIndex = 15;
+            this.label24.Text = "(Hàng thiết kế dựa trên sản phẩm có sẵn)";
+            // 
             // btnLuu
             // 
             this.btnLuu.BorderRadius = 15;
@@ -573,13 +587,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtTenSPGoc);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.guna2DateTimePicker2);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.guna2DateTimePicker1);
             this.groupBox1.Controls.Add(this.cboMaKhach);
-            this.groupBox1.Controls.Add(this.cboMaNhanVien);
+            this.groupBox1.Controls.Add(this.cboMaSPGoc);
             this.groupBox1.Controls.Add(this.pictureBox3);
             this.groupBox1.Controls.Add(this.txtTenKhach);
             this.groupBox1.Controls.Add(this.txtDiaChi);
@@ -599,13 +613,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chung";
             // 
-            // textBox1
+            // txtTenSPGoc
             // 
-            this.textBox1.Location = new System.Drawing.Point(246, 72);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 22);
-            this.textBox1.TabIndex = 24;
+            this.txtTenSPGoc.Location = new System.Drawing.Point(246, 72);
+            this.txtTenSPGoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTenSPGoc.Name = "txtTenSPGoc";
+            this.txtTenSPGoc.Size = new System.Drawing.Size(298, 22);
+            this.txtTenSPGoc.TabIndex = 24;
             // 
             // label5
             // 
@@ -663,15 +677,27 @@
             this.cboMaKhach.TabIndex = 14;
             this.cboMaKhach.ValueMember = "MaKhach";
             // 
-            // cboMaNhanVien
+            // cboMaSPGoc
             // 
-            this.cboMaNhanVien.DisplayMember = "MaNhanVien";
-            this.cboMaNhanVien.FormattingEnabled = true;
-            this.cboMaNhanVien.Location = new System.Drawing.Point(246, 27);
-            this.cboMaNhanVien.Name = "cboMaNhanVien";
-            this.cboMaNhanVien.Size = new System.Drawing.Size(298, 24);
-            this.cboMaNhanVien.TabIndex = 13;
-            this.cboMaNhanVien.ValueMember = "MaNhanVien";
+            this.cboMaSPGoc.DataSource = this.tblHangBindingSource;
+            this.cboMaSPGoc.DisplayMember = "MaHang";
+            this.cboMaSPGoc.FormattingEnabled = true;
+            this.cboMaSPGoc.Location = new System.Drawing.Point(246, 27);
+            this.cboMaSPGoc.Name = "cboMaSPGoc";
+            this.cboMaSPGoc.Size = new System.Drawing.Size(298, 24);
+            this.cboMaSPGoc.TabIndex = 13;
+            this.cboMaSPGoc.ValueMember = "MaHang";
+            this.cboMaSPGoc.TextChanged += new System.EventHandler(this.cboMaNhanVien_TextChanged);
+            // 
+            // tblHangBindingSource
+            // 
+            this.tblHangBindingSource.DataMember = "tblHang";
+            this.tblHangBindingSource.DataSource = this.qLBHDataSet1;
+            // 
+            // qLBHDataSet1
+            // 
+            this.qLBHDataSet1.DataSetName = "QLBHDataSet1";
+            this.qLBHDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // pictureBox3
             // 
@@ -869,14 +895,9 @@
         System.Drawing.Color.Blue,
         System.Drawing.Color.Orange};
             // 
-            // label24
+            // tblHangTableAdapter
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(805, 58);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(249, 16);
-            this.label24.TabIndex = 15;
-            this.label24.Text = "(Hàng thiết kế dựa trên sản phẩm có sẵn)";
+            this.tblHangTableAdapter.ClearBeforeFill = true;
             // 
             // frmCaNhanHoa
             // 
@@ -892,6 +913,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCaNhanHoa";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmCaNhanHoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tblChatLieuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet)).EndInit();
             this.fillByToolStrip.ResumeLayout(false);
@@ -909,6 +931,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvHDBanHang)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tblHangBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLBHDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -953,7 +977,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cboMaKhach;
-        private System.Windows.Forms.ComboBox cboMaNhanVien;
+        private System.Windows.Forms.ComboBox cboMaSPGoc;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox txtTenKhach;
         private System.Windows.Forms.TextBox txtDiaChi;
@@ -976,7 +1000,7 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTenSPGoc;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label14;
@@ -984,5 +1008,8 @@
         private System.Windows.Forms.Label label23;
         private Guna.UI2.WinForms.Guna2ColorTransition guna2ColorTransition1;
         private System.Windows.Forms.Label label24;
+        private QLBHDataSet1 qLBHDataSet1;
+        private System.Windows.Forms.BindingSource tblHangBindingSource;
+        private QLBHDataSet1TableAdapters.tblHangTableAdapter tblHangTableAdapter;
     }
 }
