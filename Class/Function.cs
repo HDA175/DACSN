@@ -18,7 +18,7 @@ namespace DACSN.Class
         {
 
             con = new SqlConnection();
-            con.ConnectionString = Properties.Settings.Default.QLBHConnectionString;
+            con.ConnectionString = Properties.Settings.Default.QLBanHangConnectionString;
             if (con.State != ConnectionState.Open)
             {
                 con.Open();

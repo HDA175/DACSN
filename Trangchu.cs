@@ -81,7 +81,7 @@ namespace DACSN
 
         private void btnTimkiem_Click(object sender, EventArgs e)
         {
-            frmTimSanPham frmTimSanPham = new frmTimSanPham();  
+            frmThuToc1 frmTimSanPham = new frmThuToc1();  
             frmTimSanPham.ShowDialog();
         }
 
