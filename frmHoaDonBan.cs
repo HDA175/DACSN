@@ -531,5 +531,18 @@ namespace DACSN
         {
 
         }
+
+        private void dịchVụThuêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThueToc thueToc = new ThueToc();
+            thueToc.ShowDialog();
+
+        }
+
+        private void trảHàngThuêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThueToc2 thueToc2 = new ThueToc2();
+            thueToc2.ShowDialog();
+        }
     }
 }
