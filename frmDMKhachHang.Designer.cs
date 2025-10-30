@@ -55,6 +55,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtRefresh = new System.Windows.Forms.Button();
             this.btnSua = new Guna.UI2.WinForms.Guna2Button();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
             this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
@@ -65,7 +66,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.txtRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -417,6 +417,17 @@
             this.guna2Panel2.TabIndex = 12;
             this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
             // 
+            // txtRefresh
+            // 
+            this.txtRefresh.BackColor = System.Drawing.SystemColors.Control;
+            this.txtRefresh.Location = new System.Drawing.Point(120, 59);
+            this.txtRefresh.Name = "txtRefresh";
+            this.txtRefresh.Size = new System.Drawing.Size(127, 46);
+            this.txtRefresh.TabIndex = 16;
+            this.txtRefresh.Text = "Refresh";
+            this.txtRefresh.UseVisualStyleBackColor = false;
+            this.txtRefresh.Click += new System.EventHandler(this.txtRefresh_Click);
+            // 
             // btnSua
             // 
             this.btnSua.BorderRadius = 15;
@@ -562,17 +573,6 @@
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
-            // 
-            // txtRefresh
-            // 
-            this.txtRefresh.BackColor = System.Drawing.SystemColors.Control;
-            this.txtRefresh.Location = new System.Drawing.Point(120, 59);
-            this.txtRefresh.Name = "txtRefresh";
-            this.txtRefresh.Size = new System.Drawing.Size(127, 46);
-            this.txtRefresh.TabIndex = 16;
-            this.txtRefresh.Text = "Refresh";
-            this.txtRefresh.UseVisualStyleBackColor = false;
-            this.txtRefresh.Click += new System.EventHandler(this.txtRefresh_Click);
             // 
             // frmDMKhachHang
             // 

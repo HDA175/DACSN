@@ -26,17 +26,11 @@ namespace DACSN.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-<<<<<<< HEAD
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;TrustSer" +
-            "verCertificate=True")]
-        public string QLBanHangConnectionString {
-=======
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-05082023\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-IGUJF5O\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;" +
             "TrustServerCertificate=True")]
         public string QLBHConnectionString {
->>>>>>> 3b058b96cb2a1e1cb6cfe486ea6166a4b4369922
             get {
-                return ((string)(this["QLBanHangConnectionString"]));
+                return ((string)(this["QLBHConnectionString"]));
             }
         }
     }

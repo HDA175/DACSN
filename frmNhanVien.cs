@@ -17,7 +17,7 @@ namespace DACSN
 
     public partial class frmNhanVien : Form
     {
-        private string connectionString = @"Data Source=PC-05082023\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True";
+        private string connectionString = @"Data Source=DESKTOP-IGUJF5O\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True";
         private DataTable dtNhanVien = new DataTable();
         public frmNhanVien()
         {
