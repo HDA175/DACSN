@@ -290,7 +290,7 @@ namespace DACSN
                     if (mahdObj != null)
                     {
                         string mahd = mahdObj.ToString();
-                        frmTimSanPham frmTimSanPham = new frmTimSanPham();
+                        frmThuToc1 frmTimSanPham = new frmThuToc1();
                          frmTimSanPham.ShowDialog();
 
                         // Gọi lại hàm load nếu muốn cập nhật thống kê tồn kho sau khi chỉnh sửa

@@ -33,7 +33,6 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.cboMaHDBan = new System.Windows.Forms.ComboBox();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
-            this.txtTongTien = new System.Windows.Forms.TextBox();
             this.btnTim = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboMaHang = new System.Windows.Forms.ComboBox();
@@ -79,6 +78,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.txtTongTien = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnDoanhThu = new Guna.UI2.WinForms.Guna2Button();
@@ -97,6 +97,9 @@
             this.tblNhanVienTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblNhanVienTableAdapter();
             this.tblHangTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblHangTableAdapter();
             this.tblKhachTableAdapter = new DACSN.QLBHDataSet1TableAdapters.tblKhachTableAdapter();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dịchVụThuêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trảHàngThuêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guna2Panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblHangBindingSource)).BeginInit();
@@ -111,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Panel2
@@ -130,6 +134,7 @@
             this.guna2Panel2.Controls.Add(this.label22);
             this.guna2Panel2.Controls.Add(this.label6);
             this.guna2Panel2.Controls.Add(this.txtTongTien);
+            this.guna2Panel2.Controls.Add(this.menuStrip1);
             this.guna2Panel2.Location = new System.Drawing.Point(77, 159);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1813, 665);
@@ -161,15 +166,6 @@
             this.btnLuu.TabIndex = 14;
             this.btnLuu.Text = "Luu";
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
-            // 
-            // txtTongTien
-            // 
-            this.txtTongTien.Location = new System.Drawing.Point(1268, 30);
-            this.txtTongTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTongTien.Name = "txtTongTien";
-            this.txtTongTien.ReadOnly = true;
-            this.txtTongTien.Size = new System.Drawing.Size(322, 22);
-            this.txtTongTien.TabIndex = 13;
             // 
             // btnTim
             // 
@@ -254,6 +250,7 @@
             this.txtTenHang.Name = "txtTenHang";
             this.txtTenHang.Size = new System.Drawing.Size(282, 22);
             this.txtTenHang.TabIndex = 1;
+            this.txtTenHang.TextChanged += new System.EventHandler(this.txtTenHang_TextChanged);
             // 
             // txtDonGiaBan
             // 
@@ -655,6 +652,15 @@
             this.label6.Size = new System.Drawing.Size(0, 16);
             this.label6.TabIndex = 0;
             // 
+            // txtTongTien
+            // 
+            this.txtTongTien.Location = new System.Drawing.Point(1308, 30);
+            this.txtTongTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTongTien.Name = "txtTongTien";
+            this.txtTongTien.ReadOnly = true;
+            this.txtTongTien.Size = new System.Drawing.Size(322, 22);
+            this.txtTongTien.TabIndex = 13;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Moccasin;
@@ -882,6 +888,32 @@
             // 
             this.tblKhachTableAdapter.ClearBeforeFill = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dịchVụThuêToolStripMenuItem,
+            this.trảHàngThuêToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1813, 28);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dịchVụThuêToolStripMenuItem
+            // 
+            this.dịchVụThuêToolStripMenuItem.Name = "dịchVụThuêToolStripMenuItem";
+            this.dịchVụThuêToolStripMenuItem.Size = new System.Drawing.Size(130, 24);
+            this.dịchVụThuêToolStripMenuItem.Text = "Dịch vụ thuê tóc";
+            this.dịchVụThuêToolStripMenuItem.Click += new System.EventHandler(this.dịchVụThuêToolStripMenuItem_Click);
+            // 
+            // trảHàngThuêToolStripMenuItem
+            // 
+            this.trảHàngThuêToolStripMenuItem.Name = "trảHàngThuêToolStripMenuItem";
+            this.trảHàngThuêToolStripMenuItem.Size = new System.Drawing.Size(113, 24);
+            this.trảHàngThuêToolStripMenuItem.Text = "Trả hàng thuê";
+            this.trảHàngThuêToolStripMenuItem.Click += new System.EventHandler(this.trảHàngThuêToolStripMenuItem_Click);
+            // 
             // frmHoaDonBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -891,6 +923,7 @@
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.guna2Panel2);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmHoaDonBan";
             this.Text = "Hóa đơn bán";
@@ -916,6 +949,8 @@
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -988,5 +1023,8 @@
         private QLBHDataSet1TableAdapters.tblHangTableAdapter tblHangTableAdapter;
         private System.Windows.Forms.BindingSource tblKhachBindingSource;
         private QLBHDataSet1TableAdapters.tblKhachTableAdapter tblKhachTableAdapter;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dịchVụThuêToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trảHàngThuêToolStripMenuItem;
     }
 }

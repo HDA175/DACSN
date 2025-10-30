@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DACSN
 {
-    public partial class frmTimSanPham : Form
+    public partial class frmThuToc1 : Form
     {
-        public frmTimSanPham()
+        public frmThuToc1()
         {
             InitializeComponent();
         }
@@ -23,6 +23,21 @@ namespace DACSN
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThongTin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txthoantra_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }
