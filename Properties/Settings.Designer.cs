@@ -26,8 +26,7 @@ namespace DACSN.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-05082023\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;" +
-            "TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-IGUJF5O\\SQLEXPRESS;Initial Catalog=QLBH;Integrated Security=True;TrustServerCertificate=True")]
         public string QLBHConnectionString {
             get {
                 return ((string)(this["QLBHConnectionString"]));
