@@ -1010,7 +1010,9 @@
             this.Controls.Add(this.fillByToolStrip);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ThueToc2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ThueToc2";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
