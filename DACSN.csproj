@@ -138,17 +138,17 @@
     <Compile Include="frmHangTonKho.Designer.cs">
       <DependentUpon>frmHangTonKho.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHD.Designer.cs">
+      <DependentUpon>frmHD.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHDBanChiTiet.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHDBanChiTiet.Designer.cs">
       <DependentUpon>frmHDBanChiTiet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmHoaDonBan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmHoaDonBan.Designer.cs">
-      <DependentUpon>frmHoaDonBan.cs</DependentUpon>
     </Compile>
     <Compile Include="frmNhanVien.cs">
       <SubType>Form</SubType>
@@ -228,11 +228,11 @@
     <EmbeddedResource Include="frmHangTonKho.resx">
       <DependentUpon>frmHangTonKho.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmHD.resx">
+      <DependentUpon>frmHD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHDBanChiTiet.resx">
       <DependentUpon>frmHDBanChiTiet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmHoaDonBan.resx">
-      <DependentUpon>frmHoaDonBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNhanVien.resx">
       <DependentUpon>frmNhanVien.cs</DependentUpon>
