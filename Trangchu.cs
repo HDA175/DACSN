@@ -71,7 +71,7 @@ namespace DACSN
         {
             frmNhanVien frmNhanVien = new frmNhanVien();
             frmNhanVien.ShowDialog();
-        }rmHD
+        }
 
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
