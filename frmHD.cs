@@ -12,9 +12,17 @@ namespace DACSN
 {
     public partial class frmHD : Form
     {
-        public frmHD()
+        string username;
+        public frmHD(string user)
         {
             InitializeComponent();
+            username = user;
+        }
+
+        private void dịchVụThuêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThueToc frm = new ThueToc(username);
+            frm.ShowDialog();
         }
     }
 }

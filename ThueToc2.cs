@@ -21,5 +21,10 @@ namespace DACSN
         {
 
         }
+
+        private void picAnh_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

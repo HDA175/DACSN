@@ -12,9 +12,11 @@ namespace DACSN
 {
     public partial class Trangchu : Form
     {
-        public Trangchu()
+        string username;
+        public Trangchu(string user)
         {
             InitializeComponent();
+            username = user;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -71,11 +73,11 @@ namespace DACSN
         {
             frmNhanVien frmNhanVien = new frmNhanVien();
             frmNhanVien.ShowDialog();
-        }rmHD
+        }
 
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
-            frmHD frmHoaDonBan = new frmHD(); 
+            frmHD frmHoaDonBan = new frmHD(username); 
             frmHoaDonBan.ShowDialog();
         }
 

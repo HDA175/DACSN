@@ -84,7 +84,7 @@ WHERE TenDangNhap = @u AND MatKhauHash = @h AND ChucDanh = @r", Function.con))
                         Program.CurrentUsername = username;
                         Program.CurrentRole = role;
                         this.Hide();
-                        using (var main = new Trangchu())
+                        using (var main = new Trangchu(username))
                         {
                             main.ShowDialog();
                         }
@@ -110,7 +110,7 @@ WHERE TenDangNhap = @u AND MatKhau = @p AND ChucDanh = @r", Function.con))
                         Program.CurrentUsername = username;
                         Program.CurrentRole = role;
                         this.Hide();
-                        using (var main = new Trangchu())
+                        using (var main = new Trangchu(username))
                         {
                             main.ShowDialog();
                         }
@@ -261,6 +261,11 @@ WHERE TenDangNhap = @u AND MatKhau = @p AND ChucDanh = @r", Function.con))
         }
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLogin_TextChanged(object sender, EventArgs e)
         {
 
         }
