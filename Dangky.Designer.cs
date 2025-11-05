@@ -237,6 +237,7 @@
             this.Login.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
+            //DucAnhga
 
         }
 
