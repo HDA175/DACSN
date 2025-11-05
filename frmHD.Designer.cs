@@ -116,6 +116,7 @@
             this.trảHàngThuêToolStripMenuItem.Name = "trảHàngThuêToolStripMenuItem";
             this.trảHàngThuêToolStripMenuItem.Size = new System.Drawing.Size(135, 29);
             this.trảHàngThuêToolStripMenuItem.Text = "Trả hàng thuê";
+            this.trảHàngThuêToolStripMenuItem.Click += new System.EventHandler(this.trảHàngThuêToolStripMenuItem_Click);
             // 
             // txtMaHDBan
             // 

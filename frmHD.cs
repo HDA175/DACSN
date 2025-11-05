@@ -24,5 +24,11 @@ namespace DACSN
             ThueToc frm = new ThueToc(username);
             frm.ShowDialog();
         }
+
+        private void trảHàngThuêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThueToc2 frm = new ThueToc2();
+            frm.ShowDialog();
+        }
     }
 }

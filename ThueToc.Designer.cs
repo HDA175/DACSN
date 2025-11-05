@@ -408,6 +408,7 @@
             this.btnInHoaDon.Size = new System.Drawing.Size(287, 56);
             this.btnInHoaDon.TabIndex = 8;
             this.btnInHoaDon.Text = "In hóa đơn";
+            this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
             // 
             // btnXoa
             // 
@@ -706,7 +707,7 @@
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(287, 56);
             this.btnLuu.TabIndex = 14;
-            this.btnLuu.Text = "Luu";
+            this.btnLuu.Text = "Lưu";
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // groupBox2

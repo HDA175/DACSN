@@ -123,10 +123,7 @@ namespace DACSN
             {
                 MessageBox.Show("Lỗi khi thêm dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
 
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
             try
             {
                 // Câu lệnh SQL phù hợp với cấu trúc bảng
@@ -169,7 +166,6 @@ namespace DACSN
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                MessageBox.Show("Đã lưu thông tin thuê tóc vào cơ sở dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadData();
             }
             catch (Exception ex)
@@ -178,6 +174,11 @@ namespace DACSN
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Đã lưu thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void LoadData()
         {
@@ -216,6 +217,16 @@ namespace DACSN
                 else
                     dtpNgayTra.Value = DateTime.Now;
 
+                string imagePath = txtHinhAnh.Text;
+                if (!string.IsNullOrEmpty(imagePath) && System.IO.File.Exists(imagePath))
+                {
+                    picAnh.Image = Image.FromFile(imagePath);
+                    picAnh.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    picAnh.Image = null; // Xóa ảnh cũ nếu đường dẫn không tồn tại
+                }
                 // Xử lý số (decimal)
                 txtThanhTien.Text = row.Cells["ThanhTien"].Value?.ToString();
                 txtTienDatCoc.Text = row.Cells["TienDatCoc"].Value?.ToString();
@@ -349,6 +360,11 @@ namespace DACSN
                 }
                 conn.Close();
             }
+        }
+
+        private void btnInHoaDon_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming Soon!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     } 
 }
